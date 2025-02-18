@@ -2400,7 +2400,6 @@ begin
     EmitByte($48); EmitByte($83); EmitByte($c8); EmitByte($fe); { OR EAX,BYTE -$02 }
     EmitByte($48); EmitByte($ff); EmitByte($c0); { INC EAX }
     LastOutputCodeValue:=locNone;
-    OCIMulEBX;
     OCPushEAX;
    end;
    OPEqlI:begin
