@@ -2129,6 +2129,7 @@ const EndingStubSize=$2142;
       locMovEAXDWordPtrFORStateDestValue=25;
       {new}
       locJNZJNE0x06=26;
+      locCqto=27;
 
 var LastOutputCodeValue,PC:integer;
 
@@ -2164,6 +2165,13 @@ begin
   EmitByte($58);
   LastOutputCodeValue:=locPopEAX;
  end;
+end;
+
+procedure OCCqto;
+begin
+ EmitByte($48);
+ EmitByte($99);
+ LastOutputCodeValue:=locCqto;
 end;
 
 {=}
@@ -2370,6 +2378,7 @@ begin
     OCPopEBX;
     OCPopEAX;
     OCXorEDXEDX;
+    OCCqto;
     OCIDIVEBX;
     OCPushEAX;
    end;
@@ -2377,6 +2386,7 @@ begin
     OCPopEBX;
     OCPopEAX;
     OCXorEDXEDX;
+    OCCqto;
     OCIDIVEBX;
     OCPushEDX;
    end;
@@ -2388,7 +2398,6 @@ begin
    OPRem2:begin
    {ab}
     OCPopEAX;  
-    EmitByte($48); EmitByte($8b); EmitByte($d8); { MOV EBX,EAX }
     {?}
     {eax even => eax=0; eax odd => eax=1}
     EmitByte($25); EmitByte($01); EmitByte($00); EmitByte($00); EmitByte($80); { AND EAX,$80000001 }
@@ -2400,7 +2409,6 @@ begin
     EmitByte($48); EmitByte($83); EmitByte($c8); EmitByte($fe); { OR EAX,BYTE -$02 }
     EmitByte($48); EmitByte($ff); EmitByte($c0); { INC EAX }
     LastOutputCodeValue:=locNone;
-    OCIMulEBX;
     OCPushEAX;
    end;
    OPEqlI:begin
