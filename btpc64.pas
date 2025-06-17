@@ -2388,7 +2388,6 @@ begin
    OPRem2:begin
    {ab}
     OCPopEAX;  
-    EmitByte($48); EmitByte($8b); EmitByte($d8); { MOV EBX,EAX }
     {?}
     {eax even => eax=0; eax odd => eax=1}
     EmitByte($25); EmitByte($01); EmitByte($00); EmitByte($00); EmitByte($80); { AND EAX,$80000001 }
@@ -2400,7 +2399,6 @@ begin
     EmitByte($48); EmitByte($83); EmitByte($c8); EmitByte($fe); { OR EAX,BYTE -$02 }
     EmitByte($48); EmitByte($ff); EmitByte($c0); { INC EAX }
     LastOutputCodeValue:=locNone;
-    OCIMulEBX;
     OCPushEAX;
    end;
    OPEqlI:begin
